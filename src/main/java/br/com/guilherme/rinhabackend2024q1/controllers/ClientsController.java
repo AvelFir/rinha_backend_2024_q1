@@ -1,14 +1,14 @@
 package br.com.guilherme.rinhabackend2024q1.controllers;
 
 import br.com.guilherme.rinhabackend2024q1.dtos.TransactionDto;
-import br.com.guilherme.rinhabackend2024q1.dtos.responses.TransactionResponse;
+import br.com.guilherme.rinhabackend2024q1.dtos.responses.ExtratoResponse;
+import br.com.guilherme.rinhabackend2024q1.dtos.responses.SavedTransactionResponse;
 import br.com.guilherme.rinhabackend2024q1.entities.ClienteEntity;
 import br.com.guilherme.rinhabackend2024q1.entities.TransactionEntity;
 import br.com.guilherme.rinhabackend2024q1.enuns.TransactionType;
 import br.com.guilherme.rinhabackend2024q1.services.ClienteService;
 import br.com.guilherme.rinhabackend2024q1.services.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +42,19 @@ public class ClientsController {
         TransactionEntity transactionEntity = createTransactionEntity(transactionDto, clienteEntity);
         transactionService.saveTransaction(transactionEntity);
         clienteService.saveCliente(clienteEntity);
-        return ResponseEntity.ok(new TransactionResponse(clienteEntity.getLimite(), clienteEntity.getSaldo()));
+        return ResponseEntity.ok(new SavedTransactionResponse(clienteEntity.getLimite(), clienteEntity.getSaldo()));
+    }
+
+    @GetMapping("{id}/extrato")
+    public ResponseEntity<?> getExtrato(@PathVariable(value = "id") Integer id){
+        ClienteEntity clienteEntity = clienteService.getCliente(id).orElse(null);
+        if (clienteEntity == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        ExtratoResponse extratoResponse = new ExtratoResponse(clienteEntity);
+        extratoResponse.addTransactions(transactionService.getLast10Transactions(id));
+        return ResponseEntity.ok().body(extratoResponse);
     }
 
     private TransactionEntity createTransactionEntity(TransactionDto transactionDto, ClienteEntity clienteEntity) {

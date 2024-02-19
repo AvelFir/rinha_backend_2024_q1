@@ -1,6 +1,8 @@
 package br.com.guilherme.rinhabackend2024q1.enuns;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,6 +12,7 @@ import java.util.TreeMap;
 
 @Getter
 @AllArgsConstructor
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum TransactionType {
     CREDITO("c"),
     DEBITO("d");
@@ -27,5 +30,10 @@ public enum TransactionType {
     @JsonCreator
     public static TransactionType entryOf(final String type){
         return (type == null || type.isBlank()) ? null: mapString.get(type.toLowerCase());
+    }
+
+    @JsonValue
+    public String getValue() {
+        return value;
     }
 }

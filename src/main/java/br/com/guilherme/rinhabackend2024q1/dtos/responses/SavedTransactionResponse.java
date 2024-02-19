@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransactionResponse {
+public class SavedTransactionResponse {
     private long limite;
     private long saldo;
 }
