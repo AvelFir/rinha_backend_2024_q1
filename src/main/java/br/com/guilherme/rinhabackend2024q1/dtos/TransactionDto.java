@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
 public class TransactionDto {
 
     @NotNull
-    private long valor;
+    private int valor;
     @NotNull
     private TransactionType tipo;
     @NotBlank
