@@ -1,0 +1,9 @@
+server:
+  port: 8081
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:5432/rinha?loggerLevel=OFF
+    username: admin
+    password: 123
