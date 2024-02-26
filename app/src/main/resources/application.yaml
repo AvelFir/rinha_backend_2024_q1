@@ -4,6 +4,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:5432/rinha?loggerLevel=OFF
+    url: jdbc:postgresql://${DB_HOSTNAME:localhost}:5432/rinha
     username: admin
     password: 123
+
+    jpa:
+      hibernate:
+        ddl-auto: none
