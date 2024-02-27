@@ -11,3 +11,8 @@ spring:
     jpa:
       hibernate:
         ddl-auto: none
+
+logging:
+  level:
+    com.ead: INFO
+    root: INFO

@@ -31,3 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
+/load-test/user-files/results/

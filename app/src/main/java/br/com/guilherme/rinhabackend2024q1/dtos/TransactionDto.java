@@ -15,10 +15,19 @@ import org.hibernate.validator.constraints.Length;
 public class TransactionDto {
 
     @NotNull
-    private int valor;
+    private Integer valor;
     @NotNull
     private TransactionType tipo;
     @NotBlank
     @Length(min = 1,max = 10)
     private String descricao;
+
+    public void setValor(String value) {
+        try {
+            valor = Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Valor deve ser um numero inteiro");
+        }
+    }
+
 }

@@ -59,11 +59,6 @@ services:
 #          cpus: "0.45"
 #          memory: "140MB"
 
-#  adminer:
-#    image: adminer
-#    restart: always
-#    ports:
-#      - 8080:8080
 
 networks:
   default:
