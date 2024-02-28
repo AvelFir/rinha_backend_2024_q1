@@ -1,10 +1,9 @@
 package br.com.guilherme.rinhabackend2024q1.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -20,11 +19,27 @@ public class ClienteEntity {
     @Column
     private int saldo;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<TransactionEntity> transacoes;
+
     public void increaseSaldo(int saldo){
         this.saldo += saldo;
     }
 
     public void decreaseSaldo(int saldo){
         this.saldo -= saldo;
+    }
+
+    public void criarTransacao(TransactionEntity transacao) {
+        this.transacoes.add(transacao);
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteEntity{" +
+                "id=" + id +
+                ", limite=" + limite +
+                ", saldo=" + saldo +
+                '}';
     }
 }

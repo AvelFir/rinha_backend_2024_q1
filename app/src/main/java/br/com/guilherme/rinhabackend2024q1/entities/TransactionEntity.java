@@ -30,6 +30,6 @@ public class TransactionEntity {
     private LocalDateTime realizadaEm;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false)
+    @JoinColumn(name = "id_cliente")
     private ClienteEntity cliente;
 }
