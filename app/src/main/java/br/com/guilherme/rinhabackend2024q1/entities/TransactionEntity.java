@@ -1,15 +1,19 @@
 package br.com.guilherme.rinhabackend2024q1.entities;
 
 
+import br.com.guilherme.rinhabackend2024q1.dtos.TransactionDto;
 import br.com.guilherme.rinhabackend2024q1.enuns.TransactionType;
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
 @Entity
 @Table(name = "transacoes")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TransactionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

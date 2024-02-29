@@ -30,7 +30,7 @@ public class ClienteEntity {
         this.saldo -= saldo;
     }
 
-    public void criarTransacao(TransactionEntity transacao) {
+    public void adicionarTransacao(TransactionEntity transacao) {
         this.transacoes.add(transacao);
     }
 

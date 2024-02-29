@@ -38,22 +38,19 @@ public class TransactionService {
             cliente.decreaseSaldo(request.getValor());
         }
 
-        TransactionEntity transacao = criarTransacao(request, cliente, request.getTipo());
-        cliente.criarTransacao(transacao);
+        TransactionEntity transacao =
+                TransactionEntity.builder()
+                .tipo(request.getTipo())
+                .cliente(cliente)
+                .valor(request.getValor())
+                .descricao(request.getDescricao())
+                .realizadaEm(LocalDateTime.now())
+                .build();
+
+        cliente.adicionarTransacao(transacao);
         clienteRepository.save(cliente);
-        SavedTransactionResponse response = new SavedTransactionResponse(cliente.getLimite(), cliente.getSaldo());
 
-        return response;
-    }
-
-    private TransactionEntity criarTransacao(TransactionDto request, ClienteEntity cliente, TransactionType tipo) {
-        TransactionEntity transacao = new TransactionEntity();
-        transacao.setCliente(cliente);
-        transacao.setTipo(tipo);
-        transacao.setValor(request.getValor());
-        transacao.setDescricao(request.getDescricao());
-        transacao.setRealizadaEm(LocalDateTime.now());
-        return transacao;
+        return new SavedTransactionResponse(cliente.getLimite(), cliente.getSaldo());
     }
 
 }
