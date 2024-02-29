@@ -30,7 +30,7 @@ public class TransactionEntity {
     @Column(name = "descricao", nullable = false, length = 10)
     private String descricao;
 
-    @Column(name = "realizada_em", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name = "realizada_em", nullable = false)
     private LocalDateTime realizadaEm;
 
     @ManyToOne

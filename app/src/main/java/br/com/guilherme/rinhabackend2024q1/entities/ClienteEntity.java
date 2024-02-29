@@ -34,12 +34,4 @@ public class ClienteEntity {
         this.transacoes.add(transacao);
     }
 
-    @Override
-    public String toString() {
-        return "ClienteEntity{" +
-                "id=" + id +
-                ", limite=" + limite +
-                ", saldo=" + saldo +
-                '}';
-    }
 }

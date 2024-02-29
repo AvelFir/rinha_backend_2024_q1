@@ -6,8 +6,6 @@ import br.com.guilherme.rinhabackend2024q1.dtos.responses.SavedTransactionRespon
 import br.com.guilherme.rinhabackend2024q1.services.ClienteService;
 import br.com.guilherme.rinhabackend2024q1.services.TransactionService;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +19,6 @@ public class ClientsController {
 
     @Autowired
     private TransactionService transactionService;
-
-    private static final Logger logger = LoggerFactory.getLogger(ClientsController.class);
 
     @PostMapping("/{id}/transacoes")
     public ResponseEntity<?> transacao(@PathVariable Integer id,
