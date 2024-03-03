@@ -4,7 +4,7 @@ LABEL MAINTENER="Guilherme Martins do Rosario (AvelFir)"
 
 ENV PORT=20000
 
-ARG JAR_FILE=target/crebito*.jar
+ARG JAR_FILE=target/*.jar
 
 ENV TZ=America/Sao_Paulo
 

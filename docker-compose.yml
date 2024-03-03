@@ -6,44 +6,47 @@ services:
     image: avelfir/crebito:latest
     environment:
       - DB_HOSTNAME=db
-      - JVM_XMS=150m
-      - JVM_XMX=225m
-      - CONTAINER_MEMORY=225m
+      - PORT=20000
+      - JVM_XMS=110m
+      - JVM_XMX=110m
+      - CONTAINER_MEMORY=110m
       - NEW_SIZE=5m
-      - MAX_NEW_SIZE=8m
+      - MAX_NEW_SIZE=5m
       - MIN_HEAP_FREE_RATIO=30
       - MAX_HEAP_FREE_RATIO=70
-      - MIN_POOL_CONNECTION=3
-      - MAX_POOL_CONNECTION=3
-#      - PORT=3000
-      - LOG_LEVEL=DEBUG
+      - MIN_POOL_CONNECTION=2
+      - MAX_POOL_CONNECTION=2
     ports:
-      - "3001:8081"
+      - "3001:20000"
     depends_on:
       - db
     deploy:
       resources:
         limits:
-          cpus: "0.5"
-          memory: "238MB"
+          cpus: "0.6"
+          memory: "234MB"
+    networks:
+      - default
 
   api02:
     <<: *api
     hostname: api02
     environment:
       - DB_HOSTNAME=db
-      - JVM_XMS=150m
-      - JVM_XMX=225m
-      - CONTAINER_MEMORY=225m
+      - PORT=20000
+      - JVM_XMS=110m
+      - JVM_XMX=110m
+      - CONTAINER_MEMORY=110m
       - NEW_SIZE=5m
-      - MAX_NEW_SIZE=8m
+      - MAX_NEW_SIZE=5m
       - MIN_HEAP_FREE_RATIO=30
       - MAX_HEAP_FREE_RATIO=70
-      - MIN_POOL_CONNECTION=3
-      - MAX_POOL_CONNECTION=3
-#      - PORT=3000
+      - MIN_POOL_CONNECTION=2
+      - MAX_POOL_CONNECTION=2
     ports:
-      - "3002:8081"
+      - "3002:20000"
+    networks:
+      - default
 
   nginx:
     image: nginx:latest
@@ -57,8 +60,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: "0.2"
-          memory: "12MB"
+          cpus: "0.1"
+          memory: "15MB"
     networks:
       - default
 
@@ -66,11 +69,12 @@ services:
     image:  postgres:15.3-bullseye
     container_name: db
     restart: on-failure
+    hostname: db
     deploy:
       resources:
         limits:
-          cpus: '0.3'
-          memory: '62MB'
+          cpus: '0.2'
+          memory: '67MB'
     ports:
       - "5433:5432"
     volumes:

@@ -3,7 +3,7 @@
 # Use este script para executar testes locais
 
 RESULTS_WORKSPACE="$(pwd)/load-test/user-files/results"
-GATLING_BIN_DIR=$HOME/Gatling/bin
+GATLING_BIN_DIR=$GATLING_HOME/bin
 GATLING_WORKSPACE="$(pwd)/load-test/user-files"
 
 runGatling() {
@@ -14,7 +14,7 @@ runGatling() {
 }
 
 startTest() {
-
+    echo ${GATLING_BIN_DIR}
     for i in {1..20}; do
         # 2 requests to wake the 2 api instances up :)
         curl --fail http://localhost:9999/clientes/1/extrato && \
