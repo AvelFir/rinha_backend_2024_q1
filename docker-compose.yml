@@ -1,27 +1,46 @@
-version: "3.5"
+version: "3.9"
 
 services:
   api01: &api
     hostname: api01
-    image: avelfir/rinha24q1:latest
+    image: avelfir/crebito:latest
     environment:
       - DB_HOSTNAME=db
+      - JVM_XMS=150m
+      - JVM_XMX=225m
+      - CONTAINER_MEMORY=225m
+      - NEW_SIZE=5m
+      - MAX_NEW_SIZE=8m
+      - MIN_HEAP_FREE_RATIO=30
+      - MAX_HEAP_FREE_RATIO=70
+      - MIN_POOL_CONNECTION=3
+      - MAX_POOL_CONNECTION=3
 #      - PORT=3000
+      - LOG_LEVEL=DEBUG
     ports:
       - "3001:8081"
     depends_on:
       - db
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "0.45"
-#          memory: "200MB"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "238MB"
 
   api02:
     <<: *api
     hostname: api02
     environment:
       - DB_HOSTNAME=db
+      - JVM_XMS=150m
+      - JVM_XMX=225m
+      - CONTAINER_MEMORY=225m
+      - NEW_SIZE=5m
+      - MAX_NEW_SIZE=8m
+      - MIN_HEAP_FREE_RATIO=30
+      - MAX_HEAP_FREE_RATIO=70
+      - MIN_POOL_CONNECTION=3
+      - MAX_POOL_CONNECTION=3
 #      - PORT=3000
     ports:
       - "3002:8081"
@@ -35,33 +54,42 @@ services:
       - api02
     ports:
       - "9999:9999"
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "0.15"
-#          memory: "10MB"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "12MB"
+    networks:
+      - default
 
   db:
-    image: postgres:latest
-    hostname: db
+    image:  postgres:15.3-bullseye
+    container_name: db
+    restart: on-failure
+    deploy:
+      resources:
+        limits:
+          cpus: '0.3'
+          memory: '62MB'
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres.conf:/etc/postgresql/postgresql.conf:z
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "rinha"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
+      start_period: 20s
     environment:
       - POSTGRES_PASSWORD=123
       - POSTGRES_USER=admin
       - POSTGRES_DB=rinha
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-#    command: postgres -c checkpoint_timeout=600 -c max_wal_size=2096 -c synchronous_commit=0 -c full_page_writes=0 -c fsync=off -c check_function_bodies=false
-#    command: postgres -c checkpoint_timeout=600 -c max_wal_size=4096
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: "0.45"
-#          memory: "140MB"
+    networks:
+      - default
 
 
 networks:
   default:
     driver: bridge
-    name: rinha-nginx-2024q1
