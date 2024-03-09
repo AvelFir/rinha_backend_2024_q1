@@ -18,12 +18,6 @@ services:
       - MIN_POOL_CONNECTION=2
       - MAX_POOL_CONNECTION=2
       - LOG_LEVEL=OFF
-      - JAVA_OPTS=-Dcom.sun.management.jmxremote \
-        -Dcom.sun.management.jmxremote.port=3001 \
-        -Dcom.sun.management.jmxremote.rmi.port=3001 \
-        -Dcom.sun.management.jmxremote.ssl=false \
-        -Dcom.sun.management.jmxremote.authenticate=false \
-        -Djava.rmi.server.hostname=localhost
     ports:
       - "3001:20000"
     depends_on:
@@ -50,12 +44,6 @@ services:
       - MIN_POOL_CONNECTION=2
       - MAX_POOL_CONNECTION=2
       - LOG_LEVEL=OFF
-      - JAVA_OPTS=-Dcom.sun.management.jmxremote \
-          -Dcom.sun.management.jmxremote.port=3002 \
-          -Dcom.sun.management.jmxremote.rmi.port=3002 \
-          -Dcom.sun.management.jmxremote.ssl=false \
-          -Dcom.sun.management.jmxremote.authenticate=false \
-          -Djava.rmi.server.hostname=localhost
     ports:
       - "3002:20000"
     networks:
