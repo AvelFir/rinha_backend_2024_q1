@@ -29,13 +29,19 @@ spring:
     deserialization:
       accept-float-as-int: false
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
 logging:
   level:
     com.ead: ${LOG_LEVEL:INFO}
     root: ${LOG_LEVEL:INFO}
+#
+#management:
+#  endpoint:
+#    health:
+#      show-details: always
+#  info:
+#    env:
+#      enabled: true
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'

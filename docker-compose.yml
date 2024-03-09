@@ -4,18 +4,26 @@ services:
   api01: &api
     hostname: api01
     image: avelfir/crebito:latest
+    restart: on-failure
     environment:
       - DB_HOSTNAME=db
       - PORT=20000
       - JVM_XMS=110m
       - JVM_XMX=110m
-      - CONTAINER_MEMORY=110m
+      - CONTAINER_MEMORY=234m
       - NEW_SIZE=5m
       - MAX_NEW_SIZE=5m
       - MIN_HEAP_FREE_RATIO=30
       - MAX_HEAP_FREE_RATIO=70
       - MIN_POOL_CONNECTION=2
       - MAX_POOL_CONNECTION=2
+      - LOG_LEVEL=OFF
+      - JAVA_OPTS=-Dcom.sun.management.jmxremote \
+        -Dcom.sun.management.jmxremote.port=3001 \
+        -Dcom.sun.management.jmxremote.rmi.port=3001 \
+        -Dcom.sun.management.jmxremote.ssl=false \
+        -Dcom.sun.management.jmxremote.authenticate=false \
+        -Djava.rmi.server.hostname=localhost
     ports:
       - "3001:20000"
     depends_on:
@@ -25,8 +33,6 @@ services:
         limits:
           cpus: "0.6"
           memory: "234MB"
-    networks:
-      - default
 
   api02:
     <<: *api
@@ -36,13 +42,20 @@ services:
       - PORT=20000
       - JVM_XMS=110m
       - JVM_XMX=110m
-      - CONTAINER_MEMORY=110m
+      - CONTAINER_MEMORY=234m
       - NEW_SIZE=5m
       - MAX_NEW_SIZE=5m
       - MIN_HEAP_FREE_RATIO=30
       - MAX_HEAP_FREE_RATIO=70
       - MIN_POOL_CONNECTION=2
       - MAX_POOL_CONNECTION=2
+      - LOG_LEVEL=OFF
+      - JAVA_OPTS=-Dcom.sun.management.jmxremote \
+          -Dcom.sun.management.jmxremote.port=3002 \
+          -Dcom.sun.management.jmxremote.rmi.port=3002 \
+          -Dcom.sun.management.jmxremote.ssl=false \
+          -Dcom.sun.management.jmxremote.authenticate=false \
+          -Djava.rmi.server.hostname=localhost
     ports:
       - "3002:20000"
     networks:
