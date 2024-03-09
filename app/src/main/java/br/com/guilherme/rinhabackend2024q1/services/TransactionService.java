@@ -1,7 +1,7 @@
 package br.com.guilherme.rinhabackend2024q1.services;
 
 import br.com.guilherme.rinhabackend2024q1.dtos.request.TransactionRequest;
-import br.com.guilherme.rinhabackend2024q1.dtos.responses.SavedTransactionResponse;
+import br.com.guilherme.rinhabackend2024q1.dtos.responses.transaction.TransactionResponse;
 import br.com.guilherme.rinhabackend2024q1.entities.ClienteEntity;
 import br.com.guilherme.rinhabackend2024q1.entities.TransactionEntity;
 import br.com.guilherme.rinhabackend2024q1.enuns.TransactionType;
@@ -25,7 +25,7 @@ public class TransactionService {
     ClienteRepository clienteRepository;
 
     @Transactional
-    public SavedTransactionResponse transacao(Integer id, TransactionRequest request) {
+    public TransactionResponse transacao(Integer id, TransactionRequest request) {
         ClienteEntity cliente = clienteRepository.findClienteById(id)
                 .orElseThrow(ClienteNotFoundException::new);
 
@@ -50,7 +50,7 @@ public class TransactionService {
         cliente.adicionarTransacao(transacao);
         clienteRepository.save(cliente);
 
-        return new SavedTransactionResponse(cliente.getLimite(), cliente.getSaldo());
+        return new TransactionResponse(cliente.getLimite(), cliente.getSaldo());
     }
 
 }
