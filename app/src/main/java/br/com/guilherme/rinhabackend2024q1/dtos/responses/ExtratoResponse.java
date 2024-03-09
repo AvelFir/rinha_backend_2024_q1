@@ -1,12 +1,10 @@
 package br.com.guilherme.rinhabackend2024q1.dtos.responses;
 
-import br.com.guilherme.rinhabackend2024q1.dtos.TransactionDto;
 import br.com.guilherme.rinhabackend2024q1.entities.ClienteEntity;
 import br.com.guilherme.rinhabackend2024q1.entities.TransactionEntity;
 import br.com.guilherme.rinhabackend2024q1.enuns.TransactionType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package br.com.guilherme.rinhabackend2024q1.controllers;
 
-import br.com.guilherme.rinhabackend2024q1.dtos.TransactionDto;
+import br.com.guilherme.rinhabackend2024q1.dtos.request.TransactionRequest;
 import br.com.guilherme.rinhabackend2024q1.dtos.responses.ExtratoResponse;
 import br.com.guilherme.rinhabackend2024q1.dtos.responses.SavedTransactionResponse;
 import br.com.guilherme.rinhabackend2024q1.services.ClienteService;
@@ -22,7 +22,7 @@ public class ClientsController {
 
     @PostMapping("/{id}/transacoes")
     public ResponseEntity<?> transacao(@PathVariable Integer id,
-                                                       @RequestBody @Valid TransactionDto request) {
+                                                       @RequestBody @Valid TransactionRequest request) {
         SavedTransactionResponse transacao = transactionService.transacao(id, request);
 
         return ResponseEntity.ok(transacao);

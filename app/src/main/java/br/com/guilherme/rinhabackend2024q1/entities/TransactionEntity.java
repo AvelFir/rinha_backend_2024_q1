@@ -1,7 +1,6 @@
 package br.com.guilherme.rinhabackend2024q1.entities;
 
 
-import br.com.guilherme.rinhabackend2024q1.dtos.TransactionDto;
 import br.com.guilherme.rinhabackend2024q1.enuns.TransactionType;
 import jakarta.persistence.*;
 import lombok.*;
