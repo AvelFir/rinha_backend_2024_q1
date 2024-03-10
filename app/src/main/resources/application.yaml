@@ -31,7 +31,6 @@ spring:
 
 logging:
   level:
-    com.ead: ${LOG_LEVEL:INFO}
     root: ${LOG_LEVEL:INFO}
 #
 #management:
